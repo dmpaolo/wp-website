@@ -1,0 +1,23 @@
+version: "3.1"
+
+service:
+  database:
+    mem_limit: 2048m
+    image: mariadb:10.6.4-focal
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    env_file: .env
+    volumes: 
+      - db-data:/var/lib/mysql
+    networks:
+      - wordpress-network
+  phpmyadmin:
+  wordpress:
+
+Volumes:
+  db-data:
+
+networks:
+  wordpress-network:
+  driver: bridge
